@@ -1,0 +1,92 @@
+apply plugin: 'io.spring.dependency-management'
+
+ext { springBootVersion = '1.5.9.RELEASE' }
+
+dependencyManagement {
+    imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+
+    // Consistent Dependency Management configuration across all subprojects
+    dependencies {
+        dependency 'org.codehaus.groovy:groovy-all:2.4.12'
+        dependencySet(group: 'com.github.javaparser', version: '3.5.18-aurea') {
+            entry 'javaparser-core'
+            entry 'javaparser-symbol-solver-core'
+        }
+        dependency 'com.jason-goodwin:better-monads:0.4.1'
+        dependencySet(group: 'org.apache.logging.log4j', version: '2.10.0') {
+            entry 'log4j-api'
+            entry 'log4j-core'
+        }
+        dependency 'org.apache.commons:commons-lang3:3.7'
+        dependency 'one.util:streamex:0.6.6'
+        dependency 'com.google.guava:guava:21.0'
+
+        dependency 'com.aurea:jacoco-parser:2.1.0'
+        dependency 'com.github.javafaker:javafaker:0.13'
+        dependency 'pl.allegro.finance:tradukisto:0.5.1'
+        dependency 'com.github:javacode-to-xml-converter:3.0'
+        dependency 'org.aspectj:aspectjweaver:1.8.8'
+        dependency 'javax.validation:validation-api:2.0.1.Final'
+        dependency 'org.hibernate.validator:hibernate-validator:6.0.7.Final'
+        dependency 'com.esotericsoftware.yamlbeans:yamlbeans:1.13'
+        dependency 'org.reflections:reflections:0.9.11'
+
+
+
+        //Test dependencies
+        dependency 'junit:junit:4.12'
+        dependency 'org.spockframework:spock-core:1.1-groovy-2.4'
+        dependency 'org.mockito:mockito-core:2.10.0'
+        dependency 'org.assertj:assertj-core:3.8.0'
+        dependency 'pl.pragmatists:JUnitParams:1.1.1'
+        dependency 'org.spockframework:spock-spring:1.1-groovy-2.4'
+        dependency 'org.reflections:reflections:0.9.11'
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all'
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.aspectj:aspectjweaver'
+    compile 'com.github.javaparser:javaparser-core'
+    compile 'com.github.javaparser:javaparser-symbol-solver-core'
+    compile 'com.jason-goodwin:better-monads'
+    compile 'org.apache.logging.log4j:log4j-api'
+    compile 'org.apache.logging.log4j:log4j-core'
+    compile 'org.apache.commons:commons-lang3'
+    compile 'com.google.guava:guava'
+    compile 'one.util:streamex'
+    compile 'com.aurea:jacoco-parser'
+    compile 'javax.validation:validation-api'
+    compile 'org.hibernate.validator:hibernate-validator'
+    compile('com.github:javacode-to-xml-converter') {
+        exclude group: 'com.github.javaparser', module: 'javaparser-core'
+    }
+    compile 'com.github.javafaker:javafaker'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+    compile 'com.fasterxml.jackson.core:jackson-databind'
+    compile 'pl.allegro.finance:tradukisto'
+    compile 'com.esotericsoftware.yamlbeans:yamlbeans'
+    compile 'org.reflections:reflections'
+
+    // https://mvnrepository.com/artifact/com.googlecode.java-diff-utils/diffutils
+    compile group: 'com.googlecode.java-diff-utils', name: 'diffutils', version: '1.3.0'
+
+    // https://mvnrepository.com/artifact/org.freemarker/freemarker
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.23'
+
+    testCompile 'junit:junit'
+    testCompile 'pl.pragmatists:JUnitParams'
+    testCompile 'org.spockframework:spock-core'
+    testCompile 'org.mockito:mockito-core'
+    testCompile 'org.assertj:assertj-core'
+    testCompile 'org.spockframework:spock-spring'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.reflections:reflections'
+
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.11.1'
+
+    // https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito
+    testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.7.4'
+}

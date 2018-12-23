@@ -1,0 +1,42 @@
+group 'com.aurea.aut'
+
+buildscript {
+    ext { springBootVersion = '1.5.9.RELEASE' }
+
+    repositories {
+        maven { url 'https://repo.spring.io/plugins-snapshot' }
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.5.BUILD-SNAPSHOT'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'http://code.google.com/p/java-diff-utils/'}
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://scm.devfactory.com/nexus/content/repositories/EngUnitTests"
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+apply from: "${rootDir}/compilation.gradle"
+apply from: "${rootDir}/dependencies.gradle"
+apply from: "${rootDir}/publishing.gradle"
+
+test {
+    ignoreFailures = !project.hasProperty('ci')
+}
+
+task createWrapper(type: Wrapper) {
+    gradleVersion = "4.5.1"
+}

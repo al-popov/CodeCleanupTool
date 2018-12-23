@@ -1,0 +1,8 @@
+spring.output.ansi.enabled: ALWAYS
+logging.level.root: WARN
+project:
+  fileNameResolution: OVERRIDE
+  outputFolder: ./output
+  similarPercent: 10
+  groupByExtends: false
+  produceDiffs: true

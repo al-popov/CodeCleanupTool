@@ -1,0 +1,28 @@
+apply plugin: 'java-library'
+apply plugin: 'groovy'
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+sourceSets {
+    main {
+        java { srcDirs = [] }    // no source dirs for the java compiler
+        groovy { //noinspection GroovyAssignabilityCheck
+            srcDirs = ["src/main/java"]
+        }  // compile   everything in src/ with groovy
+    }
+    test {
+        java { srcDirs = [] }
+        groovy { //noinspection GroovyAssignabilityCheck
+            srcDirs = ["src/test/java"]
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.aurea.cleanuptool.Main'
+        )
+    }
+}
